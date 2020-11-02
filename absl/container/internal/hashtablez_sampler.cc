@@ -180,7 +180,7 @@ static bool ShouldForceSampling() {
   if (ABSL_PREDICT_TRUE(state == kDontForce)) return false;
 
   if (state == kUninitialized) {
-    state = AbslContainerInternalSampleEverything() ? kForce : kDontForce;
+    state = ABSL_ANNOTATE_C_SYMBOL(AbslContainerInternalSampleEverything)() ? kForce : kDontForce;
     global_state.store(state, std::memory_order_relaxed);
   }
   return state == kForce;

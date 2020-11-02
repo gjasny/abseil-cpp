@@ -292,18 +292,18 @@ ABSL_INTERNAL_END_EXTERN_C
 // reads, while still checking other reads and all writes.
 // See also ABSL_ANNOTATE_UNPROTECTED_READ.
 #define ABSL_ANNOTATE_IGNORE_READS_BEGIN() \
-  ABSL_INTERNAL_GLOBAL_SCOPED(AnnotateIgnoreReadsBegin)(__FILE__, __LINE__)
+  ABSL_INTERNAL_GLOBAL_SCOPED(ABSL_ANNOTATE_C_SYMBOL(AnnotateIgnoreReadsBegin))(__FILE__, __LINE__)
 
 // Stop ignoring reads.
 #define ABSL_ANNOTATE_IGNORE_READS_END() \
-  ABSL_INTERNAL_GLOBAL_SCOPED(AnnotateIgnoreReadsEnd)(__FILE__, __LINE__)
+  ABSL_INTERNAL_GLOBAL_SCOPED(ABSL_ANNOTATE_C_SYMBOL(AnnotateIgnoreReadsEnd))(__FILE__, __LINE__)
 
 // Function prototypes of annotations provided by the compiler-based sanitizer
 // implementation.
 ABSL_INTERNAL_BEGIN_EXTERN_C
-void AnnotateIgnoreReadsBegin(const char* file, int line)
+void ABSL_ANNOTATE_C_SYMBOL(AnnotateIgnoreReadsBegin)(const char* file, int line)
     ABSL_INTERNAL_IGNORE_READS_BEGIN_ATTRIBUTE;
-void AnnotateIgnoreReadsEnd(const char* file,
+void ABSL_ANNOTATE_C_SYMBOL(AnnotateIgnoreReadsEnd)(const char* file,
                             int line) ABSL_INTERNAL_IGNORE_READS_END_ATTRIBUTE;
 ABSL_INTERNAL_END_EXTERN_C
 
@@ -317,15 +317,15 @@ ABSL_INTERNAL_END_EXTERN_C
 // allows IGNORE_READS_AND_WRITES to work properly.
 
 #define ABSL_ANNOTATE_IGNORE_READS_BEGIN() \
-  ABSL_INTERNAL_GLOBAL_SCOPED(AbslInternalAnnotateIgnoreReadsBegin)()
+  ABSL_INTERNAL_GLOBAL_SCOPED(ABSL_ANNOTATE_C_SYMBOL(AbslInternalAnnotateIgnoreReadsBegin))()
 
 #define ABSL_ANNOTATE_IGNORE_READS_END() \
-  ABSL_INTERNAL_GLOBAL_SCOPED(AbslInternalAnnotateIgnoreReadsEnd)()
+  ABSL_INTERNAL_GLOBAL_SCOPED(ABSL_ANNOTATE_C_SYMBOL(AbslInternalAnnotateIgnoreReadsEnd))()
 
-ABSL_INTERNAL_STATIC_INLINE void AbslInternalAnnotateIgnoreReadsBegin()
+ABSL_INTERNAL_STATIC_INLINE void ABSL_ANNOTATE_C_SYMBOL(AbslInternalAnnotateIgnoreReadsBegin)()
     ABSL_INTERNAL_IGNORE_READS_BEGIN_ATTRIBUTE {}
 
-ABSL_INTERNAL_STATIC_INLINE void AbslInternalAnnotateIgnoreReadsEnd()
+ABSL_INTERNAL_STATIC_INLINE void ABSL_ANNOTATE_C_SYMBOL(AbslInternalAnnotateIgnoreReadsEnd)()
     ABSL_INTERNAL_IGNORE_READS_END_ATTRIBUTE {}
 
 #else

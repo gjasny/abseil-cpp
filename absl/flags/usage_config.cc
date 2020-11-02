@@ -34,7 +34,7 @@ extern "C" {
 
 // Additional report of fatal usage error message before we std::exit. Error is
 // fatal if is_fatal argument to ReportUsageError is true.
-ABSL_ATTRIBUTE_WEAK void AbslInternalReportFatalUsageError(absl::string_view) {}
+ABSL_ATTRIBUTE_WEAK void ABSL_ANNOTATE_C_SYMBOL(AbslInternalReportFatalUsageError)(absl::string_view) {}
 
 }  // extern "C"
 
@@ -128,7 +128,7 @@ void ReportUsageError(absl::string_view msg, bool is_fatal) {
   std::cerr << "ERROR: " << msg << std::endl;
 
   if (is_fatal) {
-    AbslInternalReportFatalUsageError(msg);
+    ABSL_ANNOTATE_C_SYMBOL(AbslInternalReportFatalUsageError)(msg);
   }
 }
 
